@@ -72,10 +72,10 @@ that integrates with the Blueprint.js architecture. The `ResourceController`
 can be used as-is, or extended to add domain-specific customizations.
 
 ```javascript
-var blueprint = require ('@onehilltech/blueprint')
-  , mongodb = require ('@onehilltech/blueprint-mongodb')
+var blueprint          = require ('@onehilltech/blueprint')
+  , mongodb            = require ('@onehilltech/blueprint-mongodb')
   , ResourceController = mongodb.ResourceController
-  , Person = require ('../models/Person')
+  , Person             = require ('../models/Person')
   ;
     
 function PersonController () {
@@ -83,8 +83,28 @@ function PersonController () {
 }
 
 blueprint.controller (PersonController, ResourceController)
-
 ```
+
+The resource controller exposes the following actions:
+
+| Action       | HTTP method | Body                       | Response
+|--------------|-------------|----------------------------|-----------------------------------|
+| create       | POST        | {\<resource\>: { values }} | {\<resource\>: { values }}        |
+| retrieve one | GET         | N/A                        | {\<resource\>: { values }}        |
+| retrieve all | GET         | N/A                        | {\<plural-resource\>: { values }} |   
+| update       | UPDATE      | {\<resource\>: { values }} | {\<resource\>: { values }}        |
+| delete       | DELETE      | N/A                        | `true` or `false`                 |
+
+For example, the `PersonController` exposes the following actions:
+
+| Action       | HTTP method | Body                       | Response
+|--------------|-------------|----------------------------|-----------------------------------|
+| create | POST | `{person: { first_name: 'James', last_name: 'Hill }}` | `{person: {_id: 'id', first_name: 'James', last_name: 'Hill' }}` |
+| retrieve one | GET | N/A  | `{person: {_id: 'id', first_name: 'James', last_name: 'Hill' }}`  |
+| retrieve all | GET | N/A  | `{persons: [{_id: 'id', first_name: 'James', last_name: 'Hill' }]}` |   
+| update  | UPDATE | `{person: { first_name: 'John' }}` | `{person: {_id: 'id', first_name: 'John', last_name: 'Hill }}`        |
+| delete       | DELETE      | N/A                        | `true` or `false`                 |
+
 
 **Messaging Framework.** All actions on the default implementation of the
 `ResourceController` will generate the following events on Blueprint.js messaging 
