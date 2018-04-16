@@ -1,6 +1,8 @@
 blueprint-mongodb
 =================
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/onehilltech/blueprint-mongodb.svg)](https://greenkeeper.io/)
+
 A Blueprint.js module for MongoDB
 
 [![npm version](https://img.shields.io/npm/v/@onehilltech/blueprint-mongodb.svg)](https://www.npmjs.com/package/@onehilltech/blueprint-mongodb)
