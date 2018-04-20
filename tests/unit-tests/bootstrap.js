@@ -14,17 +14,22 @@
  * limitations under the License.
  */
 
-const {
-  Types: {
-    ObjectId
-  }
-} = require ('mongoose');
+const path  = require ('path');
+const blueprint = require ('@onehilltech/blueprint');
 
-module.exports = function toMongoId (str) {
-  try {
-    return new ObjectId (str);
-  }
-  catch (err) {
-    return str;
-  }
-};
+before (function () {
+  const appPath = path.resolve (__dirname, '../dummy/app');
+  return blueprint.createApplicationAndStart (appPath);
+});
+
+beforeEach (function () {
+  return blueprint.emit ('blueprint.test.start')
+});
+
+afterEach (function () {
+  return blueprint.emit ('blueprint.test.complete');
+});
+
+after (function () {
+  return blueprint.destroyApplication ();
+});

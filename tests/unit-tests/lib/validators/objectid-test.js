@@ -14,17 +14,16 @@
  * limitations under the License.
  */
 
-const {
-  Types: {
-    ObjectId
-  }
-} = require ('mongoose');
+const {expect}  = require ('chai');
+const validator = require ('../../../../lib/validation/objectid');
 
-module.exports = function toMongoId (str) {
-  try {
-    return new ObjectId (str);
-  }
-  catch (err) {
-    return str;
-  }
-};
+describe ('lib | validators | objectId', function () {
+  it ('should build schema for validating an ObjectID', function () {
+    let schema = validator ({});
+
+    expect (schema).to.deep.equal ({
+      isMongoId: {errorMessage: 'The id is not valid.'},
+      toMongoId: true
+    });
+  })
+});

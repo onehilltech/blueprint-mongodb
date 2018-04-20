@@ -14,17 +14,10 @@
  * limitations under the License.
  */
 
-const {
-  Types: {
-    ObjectId
-  }
-} = require ('mongoose');
-
-module.exports = function toMongoId (str) {
-  try {
-    return new ObjectId (str);
-  }
-  catch (err) {
-    return str;
+module.exports = {
+  '/users': {
+    resource: {
+      controller: 'user'
+    }
   }
 };

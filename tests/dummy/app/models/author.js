@@ -14,17 +14,10 @@
  * limitations under the License.
  */
 
-const {
-  Types: {
-    ObjectId
-  }
-} = require ('mongoose');
+const mongodb = require ('../../../../lib');
 
-module.exports = function toMongoId (str) {
-  try {
-    return new ObjectId (str);
-  }
-  catch (err) {
-    return str;
-  }
-};
+const schema = new mongodb.Schema ({
+  name: {type: String, unique: true, required: true}
+});
+
+module.exports = mongodb.resource ('author', schema, 'blueprint_authors');

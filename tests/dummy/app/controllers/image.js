@@ -14,17 +14,13 @@
  * limitations under the License.
  */
 
-const {
-  Types: {
-    ObjectId
-  }
-} = require ('mongoose');
+const GridFSController = require ('../../../../lib/gridfs-controller');
 
-module.exports = function toMongoId (str) {
-  try {
-    return new ObjectId (str);
-  }
-  catch (err) {
-    return str;
-  }
-};
+/**
+ * @class ImageController
+ */
+module.exports = GridFSController.extend ({
+  name: 'image',
+
+  chunkSizeBytes: 255,
+});

@@ -15,16 +15,11 @@
  */
 
 const {
-  Types: {
-    ObjectId
-  }
-} = require ('mongoose');
+  model
+} = require ('@onehilltech/blueprint');
 
-module.exports = function toMongoId (str) {
-  try {
-    return new ObjectId (str);
-  }
-  catch (err) {
-    return str;
-  }
-};
+const ResourceController = require ('../../../../lib/resource-controller');
+
+module.exports = ResourceController.extend ({
+  model: model ('user')
+});

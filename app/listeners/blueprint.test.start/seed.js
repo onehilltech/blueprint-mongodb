@@ -14,17 +14,15 @@
  * limitations under the License.
  */
 
-const {
-  Types: {
-    ObjectId
-  }
-} = require ('mongoose');
+const blueprint = require ('@onehilltech/blueprint');
 
-module.exports = function toMongoId (str) {
-  try {
-    return new ObjectId (str);
+const {
+  Listener,
+} = require ('@onehilltech/blueprint');
+
+module.exports = Listener.extend ({
+  handleEvent () {
+    let mongodb = blueprint.lookup ('service:mongodb');
+    return mongodb.seedConnections ();
   }
-  catch (err) {
-    return str;
-  }
-};
+});

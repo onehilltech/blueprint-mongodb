@@ -14,17 +14,30 @@
  * limitations under the License.
  */
 
-const {
-  Types: {
-    ObjectId
-  }
-} = require ('mongoose');
+module.exports = {
+  connections: {
+    $default: {
+      uri: 'mongodb://localhost/blueprint_mongodb',
+      options : {
+        readPreference: "primary",
+        forceServerObjectId: false,
+        w: 1,
+        autoReconnect: true,
+        keepAlive: 1,
+        poolSize: 5,
+      }
+    },
 
-module.exports = function toMongoId (str) {
-  try {
-    return new ObjectId (str);
-  }
-  catch (err) {
-    return str;
+    secondary : {
+      uri: 'mongodb://localhost/blueprint_mongodb',
+      options : {
+        readPreference: "primary",
+        forceServerObjectId: false,
+        w: 1,
+        autoReconnect: true,
+        keepAlive: 1,
+        poolSize: 5,
+      }
+    }
   }
 };
